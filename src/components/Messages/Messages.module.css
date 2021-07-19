@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.dialogsList {
+    width: 300px;
+    border-right: 1px solid #bfbcbc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialogsItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    border-bottom: 1px solid #bfbcbc;
+}
+
+.messagesList {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.messagesItem {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 40px;
+}
+
+.messageUserPic {
+    display: flex;
+    align-items: center;
+}
+
+.userPic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.messageNameWrapper{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.messageUserName {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.messageTime {
+    font-size: 12px;
+    margin-left: 10px;
+    color: rgb(130, 130, 130);
+}
+
+.mesagge {
+    margin-left: 60px;
+}

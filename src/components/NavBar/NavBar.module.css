@@ -1,0 +1,118 @@
+.navBar {
+    grid-area: navBar;
+    background: #F9F9F9;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.navBarWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 100%;
+    width: 190px;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+.list {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+.item {
+    margin-top: 30px;
+    position: relative;
+    width: 80px;
+}
+
+.item:before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: -25px;
+    top: -3px;
+    background-repeat: no-repeat;
+    content: ' ';
+}
+
+.profile:before {
+    background-image: url(./../../images/users.svg);
+}
+
+.messages:before {
+    background-image: url(./../../images/comment.svg);
+}
+
+.news:before {
+    background-image: url(./../../images/world.svg);
+}
+
+.music:before {
+    background-image: url(./../../images/music.svg);
+}
+
+.settings:before {
+    background-image: url(./../../images/settings.svg);
+}
+
+ .active {
+    color: #7E72F2;
+}
+
+.profile {
+    display: inline-block;
+}
+
+.userPic {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.friendsBarWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    /*background-color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;*/
+}
+
+.friendsBarWrapper > span  {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+}
+
+.friendWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.friendWrapper > span {
+    margin-left: 7px;
+}
+
+.seporator {
+    width: 80%;
+    border-top: 4px solid #929090;
+    margin: 40px 0;
+}
