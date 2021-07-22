@@ -1,6 +1,9 @@
 import UserImg from './../images/userpic.png';
 import {v1} from 'uuid';
 
+let rerenderEntireTree = (state: RootStateTypes) => {
+
+}
 
 export type DialogsDataPropsType = {
     id: string
@@ -21,6 +24,7 @@ export type PostsDataPropsType = {
     userPic: string
     like: number
 }
+
 export type FriendsPropsType = {
     id: string
     name: string
@@ -33,6 +37,7 @@ export type MessagesPagePropsType = {
 }
 export type ProfilePagePropsType = {
     postsData: Array<PostsDataPropsType>
+    newPostText: string
 }
 export type GeneralPropsType = {
     friends: Array<FriendsPropsType>
@@ -71,6 +76,7 @@ const state: RootStateTypes = {
                 like: 10
             },
         ],
+        newPostText: ''
     },
     general: {
         friends: [
@@ -80,5 +86,31 @@ const state: RootStateTypes = {
         ]
     }
 }
+
+
+export const addPost = (time: string) => {
+    const newPost = {
+        id: v1(),
+        name: 'Eduard Fedosevich',
+        time: time,
+        text: state.profilePage.newPostText,
+        userPic: UserImg,
+        like: 0
+    }
+    state.profilePage.postsData.unshift(newPost);
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state)
+}
+
+export const changeNeWPostText = (text: string) => {
+    state.profilePage.newPostText = text
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: (state: RootStateTypes) => void) => {
+    rerenderEntireTree = observer
+}
+
+
 
 export default state;

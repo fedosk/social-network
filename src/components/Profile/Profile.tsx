@@ -3,10 +3,12 @@ import {ProfileHeader} from './ProfileHeader/ProfileHeader';
 import {ProfileUserInfo} from './ProfileUserInfo/ProfileUserInfo';
 import {ProfileUserPosts} from './ProfileUserPosts/ProfileUserPosts';
 import style from './Profile.module.css'
-import {ProfilePagePropsType} from '../../Redux/state';
+import {addPost, changeNeWPostText, ProfilePagePropsType} from '../../Redux/state';
 
 type ProfilePropsType = {
-    state: ProfilePagePropsType
+    profilePage: ProfilePagePropsType
+    addPost: (time: string) => void
+    changeNeWPostText: (text: string) => void
 }
 
 
@@ -17,7 +19,10 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
             <div className={style.profileWrapper}>
                 <ProfileHeader/>
                 <ProfileUserInfo/>
-                <ProfileUserPosts state={props.state}/>
+                <ProfileUserPosts
+                    profilePage={props.profilePage}
+                    addPost={addPost}
+                    changeNeWPostText={changeNeWPostText}/>
             </div>
         </section>
     )

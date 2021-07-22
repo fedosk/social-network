@@ -8,10 +8,12 @@ import {Profile} from './components/Profile/Profile';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {RootStateTypes} from './Redux/state';
+import {addPost, changeNeWPostText, RootStateTypes} from './Redux/state';
 
 type AppPropsType = {
     state: RootStateTypes
+    addPost: (time: string) => void
+    changeNeWPostText: (text: string) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -24,7 +26,9 @@ const App: React.FC<AppPropsType> = (props) => {
                     <div className={'appWrapperContent'}>
                         <Route path={'/profile'}
                                render={() =>
-                                   <Profile state={props.state.profilePage}/>
+                                   <Profile profilePage={props.state.profilePage}
+                                            addPost={addPost}
+                                            changeNeWPostText={changeNeWPostText}/>
                                }
                         />
                         <Route path={'/messages'}
