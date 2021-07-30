@@ -2,13 +2,11 @@ import React from 'react';
 import style from './ProfileUserPosts.module.css'
 import {TextareaPosts} from './Textarea/TextareaPosts';
 import {NewPost} from './NewPost/NewPost';
-import {addPost, changeNeWPostText, ProfilePagePropsType} from '../../../Redux/state';
+import {ProfilePagePropsType} from '../../../Redux/state';
 
 type ProfileUserPostsPropsType = {
     profilePage: ProfilePagePropsType
-    addPost: (time: string) => void
-    changeNeWPostText: (text: string) => void
-
+    dispatch: () => void
 }
 
 export const ProfileUserPosts: React.FC<ProfileUserPostsPropsType> = (props) => {
@@ -17,8 +15,7 @@ export const ProfileUserPosts: React.FC<ProfileUserPostsPropsType> = (props) => 
         <div className={style.postsContainer}>
             <TextareaPosts
                 profilePage={props.profilePage}
-                addPost={addPost}
-                changeNeWPostText={changeNeWPostText}/>
+                dispatch={props.dispatch}/>
             <NewPost state={props.profilePage}/>
         </div>
     )

@@ -8,32 +8,33 @@ import {Profile} from './components/Profile/Profile';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {addPost, changeNeWPostText, RootStateTypes} from './Redux/state';
+import {StorePropsType} from './Redux/state';
 
 type AppPropsType = {
-    state: RootStateTypes
-    addPost: (time: string) => void
-    changeNeWPostText: (text: string) => void
+    store: StorePropsType
+    dispatch: () => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
+    const state = props.store.getState()
+
     return (
         <BrowserRouter>
             <div className={'appWrapper'}>
                 <div className={'appContainer'}>
                     <Header/>
-                    <NavBar state={props.state.general.friends}/>
+                    <NavBar state={state.general.friends}/>
                     <div className={'appWrapperContent'}>
                         <Route path={'/profile'}
                                render={() =>
-                                   <Profile profilePage={props.state.profilePage}
-                                            addPost={addPost}
-                                            changeNeWPostText={changeNeWPostText}/>
+                                   <Profile profilePage={state.profilePage}
+                                            dispatch={props.dispatch}
+                                            />
                                }
                         />
                         <Route path={'/messages'}
                                render={() =>
-                                   <Messages state={props.state.messagesPage}/>
+                                   <Messages state={state.messagesPage}/>
                                }
                         />
                         <Route path={'/news'}

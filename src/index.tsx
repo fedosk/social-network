@@ -4,19 +4,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addPost, changeNeWPostText, subscribe, RootStateTypes} from './Redux/state'
+import {RootStateTypes} from './Redux/state'
+import store from './Redux/state';
 
 const rerenderEntireTree = (state: RootStateTypes) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} addPost={addPost} changeNeWPostText={changeNeWPostText}/>
+            <App store={store} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(state)
-subscribe(rerenderEntireTree)
+rerenderEntireTree(store.getState())
+store.subscribe(rerenderEntireTree)
 
 
 // If you want to start measuring performance in your app, pass a function

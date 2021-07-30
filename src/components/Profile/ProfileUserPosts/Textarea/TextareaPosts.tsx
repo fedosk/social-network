@@ -4,8 +4,7 @@ import {ProfilePagePropsType} from '../../../../Redux/state';
 
 type TextareaPostsPropsType = {
     profilePage: ProfilePagePropsType
-    addPost: (time: string) => void
-    changeNeWPostText: (text: string) => void
+    dispatch: () => void
 }
 
 export const TextareaPosts: React.FC<TextareaPostsPropsType> = (props) => {
@@ -23,7 +22,7 @@ export const TextareaPosts: React.FC<TextareaPostsPropsType> = (props) => {
         const time: string = `${deys}.${month} at ${postTime.getHours()}:${postTime.getMinutes()}`
 
         if (newPostElement.current && newPostElement.current.value.trim() !== '') {
-            props.addPost(time)
+            props.dispatch('ADD-POST',time)
         } else {
             setError(true)
         }
