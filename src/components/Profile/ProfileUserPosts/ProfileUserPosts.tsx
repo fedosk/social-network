@@ -2,11 +2,11 @@ import React from 'react';
 import style from './ProfileUserPosts.module.css'
 import {TextareaPosts} from './Textarea/TextareaPosts';
 import {NewPost} from './NewPost/NewPost';
-import {ProfilePagePropsType} from '../../../Redux/state';
+import {AtionCreatorType, ProfilePagePropsType} from '../../../Redux/state';
 
 type ProfileUserPostsPropsType = {
     profilePage: ProfilePagePropsType
-    dispatch: () => void
+    dispatch: (action: AtionCreatorType) => void
 }
 
 export const ProfileUserPosts: React.FC<ProfileUserPostsPropsType> = (props) => {

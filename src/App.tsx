@@ -8,11 +8,11 @@ import {Profile} from './components/Profile/Profile';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {StorePropsType} from './Redux/state';
+import {AtionCreatorType, StorePropsType} from './Redux/state';
 
 type AppPropsType = {
     store: StorePropsType
-    dispatch: () => void
+    dispatch: (action: AtionCreatorType) => void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -26,26 +26,15 @@ const App: React.FC<AppPropsType> = (props) => {
                     <NavBar state={state.general.friends}/>
                     <div className={'appWrapperContent'}>
                         <Route path={'/profile'}
-                               render={() =>
-                                   <Profile profilePage={state.profilePage}
-                                            dispatch={props.dispatch}
-                                            />
-                               }
-                        />
+                               render={() => <Profile profilePage={state.profilePage} dispatch={props.dispatch}/>}/>
                         <Route path={'/messages'}
-                               render={() =>
-                                   <Messages state={state.messagesPage}/>
-                               }
-                        />
+                               render={() => <Messages messagesPage={state.messagesPage} dispatch={props.dispatch}/>}/>
                         <Route path={'/news'}
-                               render={() => <News/>}
-                        />
+                               render={() => <News/>}/>
                         <Route path={'/music'}
-                               render={() => <Music/>}
-                        />
+                               render={() => <Music/>}/>
                         <Route path={'/settings'}
-                               render={() => <Settings/>}
-                        />
+                               render={() => <Settings/>}/>
                     </div>
                 </div>
             </div>

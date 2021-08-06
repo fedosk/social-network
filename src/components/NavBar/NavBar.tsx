@@ -40,7 +40,7 @@ export const NavBar: React.FC<NavBarPropsType> = (props) => {
                         <NavLink to={'/settings'} activeClassName={style.active}>Settings</NavLink>
                     </li>
                 </ul>
-                <div className={style.seporator}></div>
+                <div className={style.seporator}/>
                 <div className={style.friendsBarWrapper}>
                     <span>Friends</span>
                     <div className={style.friend}>

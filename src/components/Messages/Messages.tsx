@@ -2,10 +2,19 @@ import React from 'react';
 import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsDataPropsType, MessagesDataPropsType, MessagesPagePropsType} from '../../Redux/state';
+import {
+    addPostActionCreator,
+    AtionCreatorType,
+    changeMessageInputTextActionCreator,
+    DialogsDataPropsType,
+    MessagesDataPropsType,
+    MessagesPagePropsType,
+    sendMessageActionCreator
+} from '../../Redux/state';
 
 type MessagesPropsType = {
-    state: MessagesPagePropsType
+    messagesPage: MessagesPagePropsType
+    dispatch: (action: AtionCreatorType) => void
 }
 
 const DialogItem = (props: DialogsDataPropsType) => {
@@ -33,13 +42,38 @@ const Message = (props: MessagesDataPropsType) => {
     )
 }
 
+
+
+const InputMessage = (props: MessagesPropsType) => {
+    const sendMessage = () => {
+        let textMessage = props.messagesPage.messageInputText
+        if (textMessage.trim() !== '') {
+            props.dispatch(sendMessageActionCreator(textMessage))
+        }
+    }
+
+    const changeMessageText = (event: React.FormEvent<HTMLInputElement>) => {
+        let currentTextMessage = event.currentTarget.value
+        props.dispatch(changeMessageInputTextActionCreator(currentTextMessage))
+    }
+
+    return (
+        <div className={style.InputMessageContainer}>
+            <label>
+                <input  onChange={changeMessageText} value={props.messagesPage.messageInputText} type="text" name="InputMessage" id="InputMessage"/>
+                <button onClick={sendMessage}>send</button>
+            </label>
+        </div>
+    )
+}
+
 export const Messages: React.FC<MessagesPropsType> = (props) => {
 
-    const dialogs = props.state.dialogsData
+    const dialogs = props.messagesPage.dialogsData
         .map((d: DialogsDataPropsType) =>
             <DialogItem name={d.name} id={d.id}/>)
 
-    const messages = props.state.messagesData
+    const messages = props.messagesPage.messagesData
         .map((m: MessagesDataPropsType) =>
             <Message message={m.message} time={m.time} name={m.name} userPic={m.userPic} id={m.id}/>)
 
@@ -51,6 +85,7 @@ export const Messages: React.FC<MessagesPropsType> = (props) => {
                 </div>
                 <div className={style.messagesList}>
                     {messages}
+                    <InputMessage messagesPage={props.messagesPage} dispatch={props.dispatch}/>
                 </div>
             </div>
         </div>
