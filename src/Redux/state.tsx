@@ -1,15 +1,13 @@
 import UserImg from './../images/userpic.png';
 import {v1} from 'uuid';
+import prosfileReducer, {addPostActionCreator, changePostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {changeMessageInputTextActionCreator, sendMessageActionCreator} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const CHANGE_MESSAGE_INPUT_TEXT = 'CHANGE-MESSAGE-INPUT-TEXT'
-
-const postTime = new Date()
-const deys = (postTime.getDay() < 10) ? (`0${postTime.getDay()}`) : (`${postTime.getDay()}`)
-const month = (postTime.getMonth() < 10) ? (`0${postTime.getMonth()}`) : (`${postTime.getMonth()}`)
-const time: string = `${deys}.${month} at ${postTime.getHours()}:${postTime.getMinutes()}`
 
 export type DialogsDataPropsType = {
     id: string
@@ -64,12 +62,11 @@ export type StorePropsType = {
     dispatch: (action: AtionCreatorType) => void
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const changePostTextActionCreator = (text: string) => ({type: CHANGE_POST_TEXT, text: text} as const)
-export const sendMessageActionCreator = (messageText: string) => ({type: SEND_MESSAGE, messageText: messageText} as const)
-export const changeMessageInputTextActionCreator = (messageInputText: string) => ({ type: CHANGE_MESSAGE_INPUT_TEXT, messageInputText: messageInputText} as const)
-
-export type AtionCreatorType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changePostTextActionCreator> | ReturnType<typeof sendMessageActionCreator> | ReturnType<typeof changeMessageInputTextActionCreator>
+export type AtionCreatorType =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof changePostTextActionCreator>
+    | ReturnType<typeof sendMessageActionCreator>
+    | ReturnType<typeof changeMessageInputTextActionCreator>
 
 const store: StorePropsType = {
     _state: {
@@ -122,44 +119,11 @@ const store: StorePropsType = {
     },
 
     dispatch(action) {
+        this._state.profilePage = prosfileReducer(this._state.profilePage, action)
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this._state.general = sidebarReducer(this._state.general, action)
 
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsDataPropsType = {
-                id: v1(),
-                name: 'Eduard Fedosevich',
-                time: time,
-                text: this._state.profilePage.newPostText,
-                userPic: UserImg,
-                like: 0
-            }
-            this._state.profilePage.postsData.unshift(newPost);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-        }
-
-        else if (action.type === 'CHANGE-POST-TEXT') {
-            this._state.profilePage.newPostText = action.text
-            this._callSubscriber(this._state)
-        }
-
-        else if (action.type === 'SEND-MESSAGE') {
-            const newMassage: MessagesDataPropsType = {
-                id: v1(),
-                name: 'Eduard',
-                time: time,
-                message: action.messageText,
-                userPic: UserImg,
-            }
-            this._state.messagesPage.messagesData.push(newMassage)
-            this._state.messagesPage.messageInputText = ''
-            this._callSubscriber(this._state)
-
-        }
-
-        else if (action.type === 'CHANGE-MESSAGE-INPUT-TEXT') {
-            this._state.messagesPage.messageInputText = action.messageInputText
-            this._callSubscriber(this._state)
-        }
+        this._callSubscriber(this._state)
     }
 }
 

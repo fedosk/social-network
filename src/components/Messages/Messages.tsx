@@ -3,14 +3,12 @@ import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
 import {
-    addPostActionCreator,
     AtionCreatorType,
-    changeMessageInputTextActionCreator,
     DialogsDataPropsType,
     MessagesDataPropsType,
     MessagesPagePropsType,
-    sendMessageActionCreator
 } from '../../Redux/state';
+import {changeMessageInputTextActionCreator, sendMessageActionCreator} from "../../Redux/dialogs-reducer";
 
 type MessagesPropsType = {
     messagesPage: MessagesPagePropsType
