@@ -69,3 +69,13 @@
 .mesagge {
     margin-left: 60px;
 }
+
+.friendDialog {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friendDialogName {
+    margin-left: 10px;
+}

@@ -1,7 +1,8 @@
 import style from './NewPost.module.css';
 import React from 'react';
 import  { ReactComponent as Like }  from './../../../../images/like.svg'
-import {PostsDataPropsType, ProfilePagePropsType} from '../../../../Redux/state';
+import {PostsDataPropsType, ProfilePagePropsType} from '../../../../Redux/store';
+
 
 type NewPostPropsType = {
     state: ProfilePagePropsType

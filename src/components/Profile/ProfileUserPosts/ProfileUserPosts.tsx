@@ -2,7 +2,7 @@ import React from 'react';
 import style from './ProfileUserPosts.module.css'
 import {TextareaPosts} from './Textarea/TextareaPosts';
 import {NewPost} from './NewPost/NewPost';
-import {AtionCreatorType, ProfilePagePropsType} from '../../../Redux/state';
+import {AtionCreatorType, ProfilePagePropsType} from '../../../Redux/store';
 
 type ProfileUserPostsPropsType = {
     profilePage: ProfilePagePropsType

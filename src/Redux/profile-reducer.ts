@@ -1,22 +1,31 @@
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
-import {AtionCreatorType, PostsDataPropsType, ProfilePagePropsType} from "./state";
+import {AtionCreatorType, PostsDataPropsType, ProfilePagePropsType} from "./store";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
 
-const postTime = new Date()
-const deys = (postTime.getDay() < 10) ? (`0${postTime.getDay()}`) : (`${postTime.getDay()}`)
-const month = (postTime.getMonth() < 10) ? (`0${postTime.getMonth()}`) : (`${postTime.getMonth()}`)
-const time: string = `${deys}.${month} at ${postTime.getHours()}:${postTime.getMinutes()}`
+const initiolState:ProfilePagePropsType = {
+    postsData: [
+        {
+            id: v1(),
+            name: 'Eduard Fedosevich',
+            time: new Date().toLocaleString(),
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            userPic: UserImg,
+            like: 10
+        },
+    ],
+    newPostText: '',
+}
 
-const prosfileReducer = (state:ProfilePagePropsType, action:AtionCreatorType) => {
+const prosfileReducer = (state:ProfilePagePropsType = initiolState, action:AtionCreatorType) => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataPropsType = {
                 id: v1(),
                 name: 'Eduard Fedosevich',
-                time: time,
+                time: new Date().toLocaleString(),
                 text: state.newPostText,
                 userPic: UserImg,
                 like: 0
@@ -34,6 +43,5 @@ const prosfileReducer = (state:ProfilePagePropsType, action:AtionCreatorType) =>
 
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const changePostTextActionCreator = (text: string) => ({type: CHANGE_POST_TEXT, text: text} as const)
-
 
 export default prosfileReducer

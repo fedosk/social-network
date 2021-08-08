@@ -4,14 +4,10 @@ import prosfileReducer, {addPostActionCreator, changePostTextActionCreator} from
 import dialogsReducer, {changeMessageInputTextActionCreator, sendMessageActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-const ADD_POST = 'ADD-POST';
-const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-const CHANGE_MESSAGE_INPUT_TEXT = 'CHANGE-MESSAGE-INPUT-TEXT'
-
 export type DialogsDataPropsType = {
     id: string
     name: string
+    userPic: string,
 }
 export type MessagesDataPropsType = {
     id: string
@@ -72,17 +68,17 @@ const store: StorePropsType = {
     _state: {
         messagesPage: {
             dialogsData: [
-                {id: v1(), name: 'Sergej'},
-                {id: v1(), name: 'Danik'},
-                {id: v1(), name: 'Ivan'},
-                {id: v1(), name: 'Anton'},
-                {id: v1(), name: 'Dima'}
+                {id: v1(), name: 'Sergej', userPic: UserImg,},
+                {id: v1(), name: 'Danik', userPic: UserImg,},
+                {id: v1(), name: 'Ivan', userPic: UserImg,},
+                {id: v1(), name: 'Anton', userPic: UserImg,},
+                {id: v1(), name: 'Dima', userPic: UserImg,}
             ],
             messagesData: [
-                {id: v1(), name: 'Sergej', time: '10:25', message: 'Hi!!!', userPic: UserImg,},
-                {id: v1(), name: 'Eduard', time: '10:25', message: 'Hi!!!', userPic: UserImg,},
-                {id: v1(), name: 'Sergej', time: '10:25', message: 'How are you', userPic: UserImg,},
-                {id: v1(), name: 'Eduard', time: '10:25', message: 'Okey! You??', userPic: UserImg,},
+                {id: v1(), name: 'Sergej', time: new Date().toLocaleString(), message: 'Hi!!!', userPic: UserImg,},
+                {id: v1(), name: 'Eduard', time: new Date().toLocaleString(), message: 'Hi!!!', userPic: UserImg,},
+                {id: v1(), name: 'Sergej', time: new Date().toLocaleString(), message: 'How are you', userPic: UserImg,},
+                {id: v1(), name: 'Eduard', time: new Date().toLocaleString(), message: 'Okey! You??', userPic: UserImg,},
             ],
             messageInputText: '',
         },
@@ -91,7 +87,7 @@ const store: StorePropsType = {
                 {
                     id: v1(),
                     name: 'Eduard Fedosevich',
-                    time: '11:31',
+                    time: new Date().toLocaleString(),
                     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     userPic: UserImg,
                     like: 10

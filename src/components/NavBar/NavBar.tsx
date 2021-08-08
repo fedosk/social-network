@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './NavBar.module.css'
 import {NavLink} from 'react-router-dom';
-import {FriendsPropsType} from '../../Redux/state';
+import {FriendsPropsType, GeneralPropsType} from '../../Redux/store';
 
 type NavBarPropsType = {
-    state: Array<FriendsPropsType>
+    navBar: GeneralPropsType
 }
 
 const Friend: React.FC<FriendsPropsType> = (props) => {
@@ -19,7 +19,7 @@ const Friend: React.FC<FriendsPropsType> = (props) => {
 }
 
 export const NavBar: React.FC<NavBarPropsType> = (props) => {
-    const friends = props.state.map((e: FriendsPropsType) => <Friend name={e.name} userPic={e.userPic} id={e.id}/>)
+    const friends = props.navBar.friends.map((e: FriendsPropsType) => <Friend name={e.name} userPic={e.userPic} id={e.id}/>)
     return (
         <section className={style.navBar}>
             <div className={style.navBarWrapper}>

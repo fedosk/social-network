@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import style from './TextareaPosts.module.css';
-import {AtionCreatorType, ProfilePagePropsType} from '../../../../Redux/state';
+import {AtionCreatorType, ProfilePagePropsType} from '../../../../Redux/store';
 import {addPostActionCreator, changePostTextActionCreator} from "../../../../Redux/profile-reducer";
 
 type TextareaPostsPropsType = {

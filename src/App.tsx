@@ -8,7 +8,7 @@ import {Profile} from './components/Profile/Profile';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {AtionCreatorType, StorePropsType} from './Redux/state';
+import {AtionCreatorType, StorePropsType} from './Redux/store';
 
 type AppPropsType = {
     store: StorePropsType
@@ -17,13 +17,12 @@ type AppPropsType = {
 
 const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState()
-
     return (
         <BrowserRouter>
             <div className={'appWrapper'}>
                 <div className={'appContainer'}>
                     <Header/>
-                    <NavBar state={state.general.friends}/>
+                    <NavBar navBar={state.general}/>
                     <div className={'appWrapperContent'}>
                         <Route path={'/profile'}
                                render={() => <Profile profilePage={state.profilePage} dispatch={props.dispatch}/>}/>

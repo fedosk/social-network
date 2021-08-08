@@ -7,7 +7,7 @@ import {
     DialogsDataPropsType,
     MessagesDataPropsType,
     MessagesPagePropsType,
-} from '../../Redux/state';
+} from '../../Redux/store';
 import {changeMessageInputTextActionCreator, sendMessageActionCreator} from "../../Redux/dialogs-reducer";
 
 type MessagesPropsType = {
@@ -20,7 +20,12 @@ const DialogItem = (props: DialogsDataPropsType) => {
 
     return (
         <div className={style.dialogsItem}>
-            <NavLink to={path}>{props.name}</NavLink>
+            <NavLink to={path}>
+                <div className={style.friendDialog}>
+                    <img src={props.userPic} alt={'userPic'} className={style.userPic}/>
+                    <span className={style.friendDialogName}>{props.name}</span>
+                </div>
+            </NavLink>
         </div>
     )
 }
@@ -69,7 +74,7 @@ export const Messages: React.FC<MessagesPropsType> = (props) => {
 
     const dialogs = props.messagesPage.dialogsData
         .map((d: DialogsDataPropsType) =>
-            <DialogItem name={d.name} id={d.id}/>)
+             <DialogItem name={d.name} id={d.id} userPic={d.userPic}/>)
 
     const messages = props.messagesPage.messagesData
         .map((m: MessagesDataPropsType) =>
