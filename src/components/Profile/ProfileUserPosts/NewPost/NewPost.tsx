@@ -5,12 +5,12 @@ import {PostsDataPropsType, ProfilePagePropsType} from '../../../../Redux/store'
 
 
 type NewPostPropsType = {
-    state: ProfilePagePropsType
+    postsData: Array<PostsDataPropsType>
 }
 
 export const NewPost: React.FC<NewPostPropsType> = (props) => {
 
-    const post = props.state.postsData.map((p: PostsDataPropsType) =>
+    const post = props.postsData.map((p: PostsDataPropsType) =>
         <div className={style.newPostWrapper}>
             <div className={style.postUserPic}>
                 <img src={p.userPic} alt={'userPic'} className={style.userPic}/>

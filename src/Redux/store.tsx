@@ -52,9 +52,9 @@ export type RootStateTypes = {
 
 export type StorePropsType = {
     _state: RootStateTypes
-    subscribe: (observer: (_state: RootStateTypes) => void) => void
     _callSubscriber: (_state: RootStateTypes) => void
     getState: () => RootStateTypes
+    subscribe: (observer: (_state: RootStateTypes) => void) => void
     dispatch: (action: AtionCreatorType) => void
 }
 
@@ -104,7 +104,7 @@ const store: StorePropsType = {
         }
     },
     _callSubscriber() {
-        console.log('rerender')
+
     },
 
     getState() {

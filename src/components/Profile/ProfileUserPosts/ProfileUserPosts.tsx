@@ -1,22 +1,17 @@
 import React from 'react';
 import style from './ProfileUserPosts.module.css'
-import {TextareaPosts} from './Textarea/TextareaPosts';
-import {NewPost} from './NewPost/NewPost';
-import {AtionCreatorType, ProfilePagePropsType} from '../../../Redux/store';
+import {StorePropsType} from '../../../Redux/store';
+import {TextareaPostsContainer} from "./Textarea/TextareaPostsContainer";
 
 type ProfileUserPostsPropsType = {
-    profilePage: ProfilePagePropsType
-    dispatch: (action: AtionCreatorType) => void
+    store: StorePropsType
 }
 
 export const ProfileUserPosts: React.FC<ProfileUserPostsPropsType> = (props) => {
 
     return (
         <div className={style.postsContainer}>
-            <TextareaPosts
-                profilePage={props.profilePage}
-                dispatch={props.dispatch}/>
-            <NewPost state={props.profilePage}/>
+            <TextareaPostsContainer store={props.store}/>
         </div>
     )
 }

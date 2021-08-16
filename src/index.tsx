@@ -5,12 +5,15 @@ import './index.css';
 import App from './App';
 import {RootStateTypes} from './Redux/store'
 import store from './Redux/redux-store';
+import {BrowserRouter} from "react-router-dom";
 
 const rerenderEntireTree = (state: RootStateTypes) => {
     ReactDOM.render(
-        <React.StrictMode>
-            <App store={store} dispatch={store.dispatch.bind(store)}/>
-        </React.StrictMode>,
+        <BrowserRouter>
+            <React.StrictMode>
+                <App store={store}/>
+            </React.StrictMode>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }

@@ -3,11 +3,10 @@ import {ProfileHeader} from './ProfileHeader/ProfileHeader';
 import {ProfileUserInfo} from './ProfileUserInfo/ProfileUserInfo';
 import {ProfileUserPosts} from './ProfileUserPosts/ProfileUserPosts';
 import style from './Profile.module.css'
-import {AtionCreatorType, ProfilePagePropsType} from '../../Redux/store';
+import {StorePropsType} from '../../Redux/store';
 
 type ProfilePropsType = {
-    profilePage: ProfilePagePropsType
-    dispatch: (action: AtionCreatorType) => void
+    store: StorePropsType
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -16,10 +15,7 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
             <div className={style.profileWrapper}>
                 <ProfileHeader/>
                 <ProfileUserInfo/>
-                <ProfileUserPosts
-                    profilePage={props.profilePage}
-                    dispatch={props.dispatch}
-                    />
+                <ProfileUserPosts store={props.store}/>
             </div>
         </section>
     )

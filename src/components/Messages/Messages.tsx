@@ -2,20 +2,22 @@ import React from 'react';
 import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
-import {
-    AtionCreatorType,
-    DialogsDataPropsType,
-    MessagesDataPropsType,
-    MessagesPagePropsType,
-} from '../../Redux/store';
-import {changeMessageInputTextActionCreator, sendMessageActionCreator} from "../../Redux/dialogs-reducer";
+import {DialogsDataPropsType, MessagesDataPropsType} from '../../Redux/store';
 
-type MessagesPropsType = {
-    messagesPage: MessagesPagePropsType
-    dispatch: (action: AtionCreatorType) => void
+
+type MessagesPropsType = InputMessagePropsType & {
+    dialogsData: Array<DialogsDataPropsType>
+    messagesData: Array<MessagesDataPropsType>
+}
+
+type InputMessagePropsType = {
+    onSendMessage: (textMessage: string) => void
+    onChangeMessageText: (currentTextMessage: string) => void
+    textMessages: string
 }
 
 const DialogItem = (props: DialogsDataPropsType) => {
+
     const path = `/messages/${props.id}`
 
     return (
@@ -31,6 +33,7 @@ const DialogItem = (props: DialogsDataPropsType) => {
 }
 
 const Message = (props: MessagesDataPropsType) => {
+
     return (
         <div className={style.messagesItem}>
             <div className={style.messageUserPic}>
@@ -45,25 +48,24 @@ const Message = (props: MessagesDataPropsType) => {
     )
 }
 
+const InputMessage = (props: InputMessagePropsType) => {
 
-
-const InputMessage = (props: MessagesPropsType) => {
     const sendMessage = () => {
-        let textMessage = props.messagesPage.messageInputText
+        let textMessage = props.textMessages
         if (textMessage.trim() !== '') {
-            props.dispatch(sendMessageActionCreator(textMessage))
+            props.onSendMessage(textMessage)
         }
     }
 
     const changeMessageText = (event: React.FormEvent<HTMLInputElement>) => {
         let currentTextMessage = event.currentTarget.value
-        props.dispatch(changeMessageInputTextActionCreator(currentTextMessage))
+        props.onChangeMessageText(currentTextMessage)
     }
 
     return (
         <div className={style.InputMessageContainer}>
             <label>
-                <input  onChange={changeMessageText} value={props.messagesPage.messageInputText} type="text" name="InputMessage" id="InputMessage"/>
+                <input  onChange={changeMessageText} value={props.textMessages} type="text" name="InputMessage" id="InputMessage"/>
                 <button onClick={sendMessage}>send</button>
             </label>
         </div>
@@ -72,11 +74,11 @@ const InputMessage = (props: MessagesPropsType) => {
 
 export const Messages: React.FC<MessagesPropsType> = (props) => {
 
-    const dialogs = props.messagesPage.dialogsData
+    const dialogs = props.dialogsData
         .map((d: DialogsDataPropsType) =>
              <DialogItem name={d.name} id={d.id} userPic={d.userPic}/>)
 
-    const messages = props.messagesPage.messagesData
+    const messages = props.messagesData
         .map((m: MessagesDataPropsType) =>
             <Message message={m.message} time={m.time} name={m.name} userPic={m.userPic} id={m.id}/>)
 
@@ -88,7 +90,10 @@ export const Messages: React.FC<MessagesPropsType> = (props) => {
                 </div>
                 <div className={style.messagesList}>
                     {messages}
-                    <InputMessage messagesPage={props.messagesPage} dispatch={props.dispatch}/>
+                    <InputMessage
+                        onSendMessage={props.onSendMessage}
+                        onChangeMessageText={props.onChangeMessageText}
+                        textMessages={props.textMessages}/>
                 </div>
             </div>
         </div>
