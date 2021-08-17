@@ -29,7 +29,7 @@ const dialogsReducer = (state: MessagesPagePropsType = initialState, action: Ati
                 id: v1(),
                 name: 'Eduard',
                 time: new Date().toLocaleString(),
-                message: action.messageText,
+                message: state.messageInputText,
                 userPic: UserImg,
             }
             state.messagesData.push(newMassage)
@@ -43,9 +43,8 @@ const dialogsReducer = (state: MessagesPagePropsType = initialState, action: Ati
     }
 }
 
-export const sendMessageActionCreator = (messageText: string) => ({
-    type: SEND_MESSAGE,
-    messageText: messageText
+export const sendMessageActionCreator = () => ({
+    type: SEND_MESSAGE
 } as const)
 
 export const changeMessageInputTextActionCreator = (messageInputText: string) => ({

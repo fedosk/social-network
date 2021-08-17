@@ -2,8 +2,7 @@ import React from 'react';
 import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsDataPropsType, MessagesDataPropsType} from '../../Redux/store';
-
+import {DialogsDataPropsType, MessagesDataPropsType} from "../../Redux/store";
 
 type MessagesPropsType = InputMessagePropsType & {
     dialogsData: Array<DialogsDataPropsType>
@@ -11,7 +10,7 @@ type MessagesPropsType = InputMessagePropsType & {
 }
 
 type InputMessagePropsType = {
-    onSendMessage: (textMessage: string) => void
+    onSendMessage: () => void
     onChangeMessageText: (currentTextMessage: string) => void
     textMessages: string
 }
@@ -51,9 +50,9 @@ const Message = (props: MessagesDataPropsType) => {
 const InputMessage = (props: InputMessagePropsType) => {
 
     const sendMessage = () => {
-        let textMessage = props.textMessages
-        if (textMessage.trim() !== '') {
-            props.onSendMessage(textMessage)
+        let currentTextMessage = props.textMessages
+        if (currentTextMessage.trim() !== '') {
+            props.onSendMessage()
         }
     }
 

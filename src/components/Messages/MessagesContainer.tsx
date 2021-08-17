@@ -10,8 +10,8 @@ type MessagesPropsType = {
 
 export const MessagesContainer: React.FC<MessagesPropsType> = ({store}) => {
 
-    const onSendMessage = (textMessage: string) => {
-        store.dispatch(sendMessageActionCreator(textMessage))
+    const onSendMessage = () => {
+        store.dispatch(sendMessageActionCreator())
     }
 
     const onChangeMessageText = (currentTextMessage: string) => {
