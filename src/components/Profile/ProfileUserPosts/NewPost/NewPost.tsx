@@ -1,7 +1,7 @@
 import style from './NewPost.module.css';
 import React from 'react';
 import  { ReactComponent as Like }  from './../../../../images/like.svg'
-import {PostsDataPropsType, ProfilePagePropsType} from '../../../../Redux/store';
+import {PostsDataPropsType} from '../../../../Redux/store';
 
 
 type NewPostPropsType = {
@@ -11,7 +11,7 @@ type NewPostPropsType = {
 export const NewPost: React.FC<NewPostPropsType> = (props) => {
 
     const post = props.postsData.map((p: PostsDataPropsType) =>
-        <div className={style.newPostWrapper}>
+        <div className={style.newPostWrapper} key={p.id}>
             <div className={style.postUserPic}>
                 <img src={p.userPic} alt={'userPic'} className={style.userPic}/>
                 <div className={style.postNameWrapper}>

@@ -5,7 +5,7 @@ import {AtionCreatorType, MessagesDataPropsType, MessagesPagePropsType} from "./
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const CHANGE_MESSAGE_INPUT_TEXT = 'CHANGE-MESSAGE-INPUT-TEXT'
 
-const initialState:MessagesPagePropsType = {
+const initialState: MessagesPagePropsType = {
     dialogsData: [
         {id: v1(), name: 'Sergej', userPic: UserImg,},
         {id: v1(), name: 'Danik', userPic: UserImg,},
@@ -24,7 +24,7 @@ const initialState:MessagesPagePropsType = {
 
 const dialogsReducer = (state: MessagesPagePropsType = initialState, action: AtionCreatorType) => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case SEND_MESSAGE: {
             const newMassage: MessagesDataPropsType = {
                 id: v1(),
                 name: 'Eduard',
@@ -32,12 +32,18 @@ const dialogsReducer = (state: MessagesPagePropsType = initialState, action: Ati
                 message: state.messageInputText,
                 userPic: UserImg,
             }
-            state.messagesData.push(newMassage)
-            state.messageInputText = ''
-            return state
-        case CHANGE_MESSAGE_INPUT_TEXT:
-            state.messageInputText = action.messageInputText
-            return state
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMassage],
+                messageInputText: ''
+            }
+        }
+        case CHANGE_MESSAGE_INPUT_TEXT: {
+            return {
+                ...state,
+                messageInputText: action.messageInputText
+            }
+        }
         default:
             return state
     }

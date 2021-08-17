@@ -1,29 +1,24 @@
 import React from 'react';
-import {StorePropsType} from '../../Redux/store';
+import {AtionCreatorType, RootStateTypes} from '../../Redux/store';
 import {changeMessageInputTextActionCreator, sendMessageActionCreator} from "../../Redux/dialogs-reducer";
 import {Messages} from "./Messages";
+import {connect} from "react-redux";
 
-
-type MessagesPropsType = {
-    store: StorePropsType
+let mapStateToProps = (state: RootStateTypes) => {
+    return {
+        textMessages: state.messagesPage.messageInputText,
+        dialogsData: state.messagesPage.dialogsData,
+        messagesData: state.messagesPage.messagesData,
+    }
 }
 
-export const MessagesContainer: React.FC<MessagesPropsType> = ({store}) => {
-
-    const onSendMessage = () => {
-        store.dispatch(sendMessageActionCreator())
+let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
+    return {
+        onSendMessage: () => {dispatch(sendMessageActionCreator())},
+        onChangeMessageText: (currentTextMessage: string) =>{dispatch(changeMessageInputTextActionCreator(currentTextMessage))},
     }
-
-    const onChangeMessageText = (currentTextMessage: string) => {
-        store.dispatch(changeMessageInputTextActionCreator(currentTextMessage))
-    }
-
-
-    return (
-        <Messages onSendMessage={onSendMessage}
-                  onChangeMessageText={onChangeMessageText}
-                  textMessages = {store.getState().messagesPage.messageInputText}
-                  dialogsData={store.getState().messagesPage.dialogsData}
-                  messagesData={store.getState().messagesPage.messagesData}/>
-    )
 }
+
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
+
+export default MessagesContainer

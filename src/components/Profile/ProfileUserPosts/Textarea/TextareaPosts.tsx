@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import style from './TextareaPosts.module.css';
-import {AtionCreatorType, PostsDataPropsType, ProfilePagePropsType} from '../../../../Redux/store';
-import {addPostActionCreator, changePostTextActionCreator} from "../../../../Redux/profile-reducer";
+import {PostsDataPropsType} from '../../../../Redux/store';
+
 import {NewPost} from "../NewPost/NewPost";
 
 type TextareaPostsPropsType = {
-    changePostText: (text: string) => void
-    postsData: Array<PostsDataPropsType>
-    addPost: () => void
     postText: string
+    postsData: Array<PostsDataPropsType>
+    changePostText: (text: string) => void
+    addPost: () => void
 }
 
 

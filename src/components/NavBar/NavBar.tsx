@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {FriendsPropsType, GeneralPropsType} from '../../Redux/store';
 
 type NavBarPropsType = {
-    navBar: GeneralPropsType
+    friendsList: GeneralPropsType
 }
 
 const Friend: React.FC<FriendsPropsType> = (props) => {
@@ -19,7 +19,7 @@ const Friend: React.FC<FriendsPropsType> = (props) => {
 }
 
 export const NavBar: React.FC<NavBarPropsType> = (props) => {
-    const friends = props.navBar.friends.map((e: FriendsPropsType) => <Friend name={e.name} userPic={e.userPic} id={e.id}/>)
+    const friends = props.friendsList.friends.map((e: FriendsPropsType) => <Friend name={e.name} userPic={e.userPic} id={e.id} key={e.id}/>)
     return (
         <section className={style.navBar}>
             <div className={style.navBarWrapper}>
@@ -35,6 +35,9 @@ export const NavBar: React.FC<NavBarPropsType> = (props) => {
                     </li>
                     <li className={`${style.item} ${style.music}`}>
                         <NavLink to={'/music'} activeClassName={style.active}>Music</NavLink>
+                    </li>
+                    <li className={`${style.item} ${style.music}`}>
+                        <NavLink to={'/users'} activeClassName={style.active}>Users</NavLink>
                     </li>
                     <li className={`${style.item} ${style.settings}`}>
                         <NavLink to={'/settings'} activeClassName={style.active}>Settings</NavLink>

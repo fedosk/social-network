@@ -1,28 +1,25 @@
 import React from 'react';
-import {StorePropsType} from '../../../../Redux/store';
+import {AtionCreatorType, RootStateTypes} from '../../../../Redux/store';
 import {addPostActionCreator, changePostTextActionCreator} from "../../../../Redux/profile-reducer";
 import {TextareaPosts} from "./TextareaPosts";
+import {connect} from "react-redux";
 
-type TextareaPostsPropsType = {
-    store: StorePropsType
+let mapStateToProps = (state: RootStateTypes) => {
+    return {
+        postText: state.profilePage.newPostText,
+        postsData: state.profilePage.postsData
+    }
 }
 
-export const TextareaPostsContainer: React.FC<TextareaPostsPropsType> = ({store}) => {
-
-    const addPost = () => {
-        store.dispatch(addPostActionCreator())
+let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
+    return {
+        addPost: () => {dispatch(addPostActionCreator())},
+        changePostText: (text: string) => {dispatch(changePostTextActionCreator(text))}
     }
-
-    const postChange = (text: string) => {
-        store.dispatch(changePostTextActionCreator(text))
-    }
-
-    return (
-        <>
-            <TextareaPosts addPost={addPost} changePostText={postChange}
-                           postText={store.getState().profilePage.newPostText}
-                           postsData={store.getState().profilePage.postsData}/></>
-    )
 }
+
+const TextareaPostsContainer = connect(mapStateToProps, mapDispatchToProps)(TextareaPosts)
+
+export default TextareaPostsContainer
 
 
