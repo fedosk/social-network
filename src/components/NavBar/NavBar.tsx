@@ -36,7 +36,7 @@ export const NavBar: React.FC<NavBarPropsType> = (props) => {
                     <li className={`${style.item} ${style.music}`}>
                         <NavLink to={'/music'} activeClassName={style.active}>Music</NavLink>
                     </li>
-                    <li className={`${style.item} ${style.music}`}>
+                    <li className={`${style.item} ${style.users}`}>
                         <NavLink to={'/users'} activeClassName={style.active}>Users</NavLink>
                     </li>
                     <li className={`${style.item} ${style.settings}`}>

@@ -3,7 +3,7 @@ import UserImg from "../images/userpic.png";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
-const SHOW_MORE = 'SHOW_MORE'
+const SET_USERS = 'SET_USERS'
 
 export type locationPropsType = {
     city: string,
@@ -56,22 +56,20 @@ const initialState: usersStatePropsType = {
             userPic: UserImg,
             status: 'I\'m looking for a job',
             location: {city: 'Minsk', country: 'Belarus'}
-        },
+        }
     ]
 }
 
 const usersReducer = (state: usersStatePropsType = initialState, action: UsersAtionCreatorType) => {
     switch (action.type) {
         case FOLLOW: {
-            let newState = state.users.map(u => u.id === action.id ? {...u, follow: true} : u)
-            return {...state, newState}
+            return {...state, users: state.users.map(u => u.id === action.id ? {...u, follow: true} : u)}
         }
         case UNFOLLOW: {
-            let newState = state.users.map(u => u.id === action.id ? {...u, follow: false} : u)
-            return {...state, newState}
+            return {...state, users: state.users.map(u => u.id === action.id ? {...u, follow: false} : u)}
         }
-        case SHOW_MORE: {
-            return state
+        case SET_USERS: {
+            return {...state, users: [...state.users, ...action.users]}
         }
         default:
             return state
@@ -92,8 +90,9 @@ export const unfollowAC = (id: string) => ({
     id
 } as const)
 
-export const showMoreAC = () => ({
-    type: SHOW_MORE
+export const showMoreAC = (users: usersPropsType[]) => ({
+    type: SET_USERS,
+    users: users
 } as const)
 
 export default usersReducer

@@ -45,7 +45,7 @@ a {
 }
 
 .profile:before {
-    background-image: url(./../../images/users.svg);
+    background-image: url(./../../images/user.svg);
 }
 
 .messages:before {
@@ -62,6 +62,10 @@ a {
 
 .settings:before {
     background-image: url(./../../images/settings.svg);
+}
+
+.users:before {
+    background-image: url(./../../images/users.svg);
 }
 
 .active {

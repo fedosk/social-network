@@ -1,14 +1,57 @@
 import React from "react";
 import style from "../Users/Users.module.css";
 import {locationPropsType, usersPropsType} from "../../Redux/users-reducer";
+import {v1} from "uuid";
+import UserImg from "../../images/userpic.png";
 
 type UsersPropsType = {
     usersList: Array<usersPropsType>
     onFollow: (id: string) => void
     onUnfollow: (id: string) => void
+    showMore: (users: usersPropsType[]) => void
 }
 
-const UserCard: React.FC<usersPropsType> = (props) => {
+type usersCardPropsType = usersPropsType & {
+    onFollow: (id: string) => void
+    onUnfollow: (id: string) => void
+}
+
+const users:Array<usersPropsType> = [
+    {
+        id: v1(),
+        follow: true,
+        name: 'Sergej Orda',
+        userPic: UserImg,
+        status: 'I\'m looking for a job',
+        location: {city: 'Minsk', country: 'Belarus'}
+    },
+    {
+        id: v1(),
+        follow: false,
+        name: 'Danil Pleshko',
+        userPic: UserImg,
+        status: 'I\'m looking for a job',
+        location: {city: 'Minsk', country: 'Belarus'}
+    },
+    {
+        id: v1(),
+        follow: false,
+        name: 'Anton Kasian',
+        userPic: UserImg,
+        status: 'I\'m looking for a job',
+        location: {city: 'Minsk', country: 'Belarus'}
+    },
+    {
+        id: v1(),
+        follow: false,
+        name: 'Ivan Ilkovskiy',
+        userPic: UserImg,
+        status: 'I\'m looking for a job',
+        location: {city: 'Minsk', country: 'Belarus'}
+    }
+]
+
+const UserCard: React.FC<usersCardPropsType> = (props) => {
     return (
         <div className={style.userCardWrapper}>
             <img className={style.userPic} src={props.userPic} alt={'userPic'} />
@@ -17,17 +60,29 @@ const UserCard: React.FC<usersPropsType> = (props) => {
                 <p className={style.location}>{props.location.city}, {props.location.country}</p>
                 <p className={style.status}>{props.status}</p>
             </div>
-            <button className={style.btn} onClick={()=>{}}>{!props.follow ? 'Follow': 'Unfollow'}</button>
+            {!props.follow
+                ? <button className={style.btn} onClick={() => props.onFollow(props.id)}>follow</button>
+                : <button className={style.btn} onClick={() => props.onUnfollow(props.id)}>unfollow</button>}
         </div>
     )
 }
 
 export const Users: React.FC<UsersPropsType> = (props) => {
-    let UsersCards = props.usersList.map((u:usersPropsType) => <UserCard id={u.id} follow={u.follow} name={u.name} userPic={u.userPic} status={u.status} location={u.location} key={u.id}/>)
+    let UsersCards = props.usersList.map((u:usersPropsType) => <UserCard id={u.id}
+                                                                         follow={u.follow}
+                                                                         name={u.name}
+                                                                         userPic={u.userPic}
+                                                                         status={u.status}
+                                                                         location={u.location} key={u.id}
+                                                                         onFollow={props.onFollow}
+                                                                         onUnfollow={props.onUnfollow}
+
+    />)
     return (
         <div className={style.section}>
             <div className={style.wrapper}>
                 {UsersCards}
+                <button className={style.btn} onClick={() => props.showMore(users)}>Show More</button>
             </div>
         </div>
     )

@@ -69,20 +69,22 @@
 
 .btn {
     border: none;
-    padding: 0;
+    padding: 14px 20px;
     cursor: pointer;
     outline: inherit;
     background: #7E72F2;
     border-radius: 6px;
-    width: 80px;
-    height: 40px;
     font-family: 'Montserrat', sans-serif;
     color: #FFFFFF;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .btn:hover {
     background: #5945ec;
     transition: 0.2s;
+}
+
+.wrapper ~ .btn {
+    width: 100px;
 }
