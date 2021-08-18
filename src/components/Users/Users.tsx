@@ -16,7 +16,7 @@ type usersCardPropsType = usersPropsType & {
     onUnfollow: (id: string) => void
 }
 
-const users:Array<usersPropsType> = [
+const users: Array<usersPropsType> = [
     {
         id: v1(),
         follow: true,
@@ -54,7 +54,7 @@ const users:Array<usersPropsType> = [
 const UserCard: React.FC<usersCardPropsType> = (props) => {
     return (
         <div className={style.userCardWrapper}>
-            <img className={style.userPic} src={props.userPic} alt={'userPic'} />
+            <img className={style.userPic} src={props.userPic} alt={'userPic'}/>
             <div className={style.textWrapper}>
                 <p className={style.name}>{props.name}</p>
                 <p className={style.location}>{props.location.city}, {props.location.country}</p>
@@ -68,21 +68,22 @@ const UserCard: React.FC<usersCardPropsType> = (props) => {
 }
 
 export const Users: React.FC<UsersPropsType> = (props) => {
-    let UsersCards = props.usersList.map((u:usersPropsType) => <UserCard id={u.id}
-                                                                         follow={u.follow}
-                                                                         name={u.name}
-                                                                         userPic={u.userPic}
-                                                                         status={u.status}
-                                                                         location={u.location} key={u.id}
-                                                                         onFollow={props.onFollow}
-                                                                         onUnfollow={props.onUnfollow}
+    let UsersCards = props.usersList.map((u: usersPropsType) =>
+        <UserCard id={u.id}
+                  follow={u.follow}
+                  name={u.name}
+                  userPic={u.userPic}
+                  status={u.status}
+                  location={u.location} key={u.id}
+                  onFollow={props.onFollow}
+                  onUnfollow={props.onUnfollow}
 
-    />)
+        />)
     return (
         <div className={style.section}>
             <div className={style.wrapper}>
                 {UsersCards}
-                <button className={style.btn} onClick={() => props.showMore(users)}>Show More</button>
+                <button className={`${style.btn} ${style.showMore}`} onClick={() => props.showMore(users)}>Show More</button>
             </div>
         </div>
     )
