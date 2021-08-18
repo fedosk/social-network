@@ -1,11 +1,31 @@
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
-import {AtionCreatorType, MessagesDataPropsType, MessagesPagePropsType} from "./store";
+import {AtionCreatorType} from "./store";
 
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const CHANGE_MESSAGE_INPUT_TEXT = 'CHANGE-MESSAGE-INPUT-TEXT'
 
-const initialState: MessagesPagePropsType = {
+export type DialogsDataPropsType = {
+    id: string
+    name: string
+    userPic: string,
+}
+
+export type MessagesDataPropsType = {
+    id: string
+    name: string
+    time: string
+    message: string
+    userPic: string
+}
+
+export type dialogsPropsType = {
+    dialogsData: DialogsDataPropsType[]
+    messagesData: MessagesDataPropsType[]
+    messageInputText: string
+}
+
+const initialState: dialogsPropsType = {
     dialogsData: [
         {id: v1(), name: 'Sergej', userPic: UserImg,},
         {id: v1(), name: 'Danik', userPic: UserImg,},
@@ -22,7 +42,7 @@ const initialState: MessagesPagePropsType = {
     messageInputText: '',
 }
 
-const dialogsReducer = (state: MessagesPagePropsType = initialState, action: AtionCreatorType) => {
+const dialogsReducer = (state: dialogsPropsType = initialState, action: AtionCreatorType) => {
     switch (action.type) {
         case SEND_MESSAGE: {
             const newMassage: MessagesDataPropsType = {

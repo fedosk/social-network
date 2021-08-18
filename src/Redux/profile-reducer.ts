@@ -1,11 +1,25 @@
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
-import {AtionCreatorType, PostsDataPropsType, ProfilePagePropsType} from "./store";
+import {AtionCreatorType} from "./store";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
 
-const initiolState: ProfilePagePropsType = {
+export type PostsDataPropsType = {
+    id: string
+    name: string
+    time: string
+    text: string
+    userPic: string
+    like: number
+}
+
+export type profilePropsType = {
+    postsData: Array<PostsDataPropsType>
+    newPostText: string
+}
+
+const initialState: profilePropsType = {
     postsData: [
         {
             id: v1(),
@@ -19,7 +33,7 @@ const initiolState: ProfilePagePropsType = {
     newPostText: '',
 }
 
-const prosfileReducer = (state: ProfilePagePropsType = initiolState, action: AtionCreatorType) => {
+const prosfileReducer = (state: profilePropsType = initialState, action: AtionCreatorType) => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostsDataPropsType = {

@@ -1,10 +1,14 @@
 import React from 'react';
-import {AtionCreatorType, RootStateTypes} from '../../Redux/store';
-import {changeMessageInputTextActionCreator, sendMessageActionCreator} from "../../Redux/dialogs-reducer";
+
+import {
+    changeMessageInputTextActionCreator,
+    sendMessageActionCreator
+} from "../../Redux/dialogs-reducer";
 import {Messages} from "./Messages";
 import {connect} from "react-redux";
+import {AppDispatch, RootState} from "../../Redux/redux-store";
 
-let mapStateToProps = (state: RootStateTypes) => {
+let mapStateToProps = (state: RootState) => {
     return {
         textMessages: state.messagesPage.messageInputText,
         dialogsData: state.messagesPage.dialogsData,
@@ -12,10 +16,14 @@ let mapStateToProps = (state: RootStateTypes) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
+let mapDispatchToProps = (dispatch: AppDispatch) => {
     return {
-        onSendMessage: () => {dispatch(sendMessageActionCreator())},
-        onChangeMessageText: (currentTextMessage: string) =>{dispatch(changeMessageInputTextActionCreator(currentTextMessage))},
+        onSendMessage: () => {
+            dispatch(sendMessageActionCreator())
+        },
+        onChangeMessageText: (currentTextMessage: string) => {
+            dispatch(changeMessageInputTextActionCreator(currentTextMessage))
+        },
     }
 }
 

@@ -11,8 +11,8 @@ type InputMessagePropsType = {
 }
 
 type MessagesPropsType = InputMessagePropsType & {
-    dialogsData: Array<DialogsDataPropsType>
-    messagesData: Array<MessagesDataPropsType>
+    dialogsData: DialogsDataPropsType[]
+    messagesData: MessagesDataPropsType[]
 }
 
 const DialogItem = (props: DialogsDataPropsType) => {

@@ -1,17 +1,17 @@
 import React from 'react';
-import {AtionCreatorType, RootStateTypes} from '../../../../Redux/store';
 import {addPostActionCreator, changePostTextActionCreator} from "../../../../Redux/profile-reducer";
 import {TextareaPosts} from "./TextareaPosts";
 import {connect} from "react-redux";
+import {AppDispatch, RootState} from "../../../../Redux/redux-store";
 
-let mapStateToProps = (state: RootStateTypes) => {
+let mapStateToProps = (state: RootState) => {
     return {
         postText: state.profilePage.newPostText,
         postsData: state.profilePage.postsData
     }
 }
 
-let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
+let mapDispatchToProps = (dispatch: AppDispatch) => {
     return {
         addPost: () => {dispatch(addPostActionCreator())},
         changePostText: (text: string) => {dispatch(changePostTextActionCreator(text))}
