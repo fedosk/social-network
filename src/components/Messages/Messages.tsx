@@ -2,18 +2,17 @@ import React from 'react';
 import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsDataPropsType, MessagesDataPropsType} from '../../Redux/store';
-
-
-type MessagesPropsType = InputMessagePropsType & {
-    dialogsData: Array<DialogsDataPropsType>
-    messagesData: Array<MessagesDataPropsType>
-}
+import {DialogsDataPropsType, MessagesDataPropsType} from "../../Redux/store";
 
 type InputMessagePropsType = {
-    onSendMessage: (textMessage: string) => void
+    onSendMessage: () => void
     onChangeMessageText: (currentTextMessage: string) => void
     textMessages: string
+}
+
+type MessagesPropsType = InputMessagePropsType & {
+    dialogsData: DialogsDataPropsType[]
+    messagesData: MessagesDataPropsType[]
 }
 
 const DialogItem = (props: DialogsDataPropsType) => {
@@ -51,9 +50,9 @@ const Message = (props: MessagesDataPropsType) => {
 const InputMessage = (props: InputMessagePropsType) => {
 
     const sendMessage = () => {
-        let textMessage = props.textMessages
-        if (textMessage.trim() !== '') {
-            props.onSendMessage(textMessage)
+        let currentTextMessage = props.textMessages
+        if (currentTextMessage.trim() !== '') {
+            props.onSendMessage()
         }
     }
 
@@ -76,11 +75,11 @@ export const Messages: React.FC<MessagesPropsType> = (props) => {
 
     const dialogs = props.dialogsData
         .map((d: DialogsDataPropsType) =>
-             <DialogItem name={d.name} id={d.id} userPic={d.userPic}/>)
+             <DialogItem name={d.name} id={d.id} userPic={d.userPic} key={d.id}/>)
 
     const messages = props.messagesData
         .map((m: MessagesDataPropsType) =>
-            <Message message={m.message} time={m.time} name={m.name} userPic={m.userPic} id={m.id}/>)
+            <Message message={m.message} time={m.time} name={m.name} userPic={m.userPic} id={m.id} key={m.id}/>)
 
     return (
         <div className={generelContentStyle.section}>

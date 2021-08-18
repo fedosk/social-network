@@ -2,7 +2,18 @@ import {AtionCreatorType, GeneralPropsType, MessagesPagePropsType} from "./store
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
 
-const initialState:GeneralPropsType = {
+export type FriendsPropsType = {
+    id: string
+    name: string
+    userPic: string
+}
+
+export type sideBarPropsType = {
+    friends: FriendsPropsType[]
+}
+
+
+const initialState:sideBarPropsType = {
     friends: [
         {id: v1(), name: 'Sergej', userPic: UserImg},
         {id: v1(), name: 'Danik', userPic: UserImg},
@@ -10,7 +21,7 @@ const initialState:GeneralPropsType = {
     ],
 }
 
-const sidebarReducer = (state: GeneralPropsType = initialState, action: AtionCreatorType) => {
+const sidebarReducer = (state: sideBarPropsType = initialState, action: AtionCreatorType) => {
     return state
 }
 
