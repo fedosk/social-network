@@ -1,6 +1,6 @@
 import React from "react";
 import style from "../Users/Users.module.css";
-import {locationPropsType, usersPropsType} from "../../Redux/users-reducer";
+import {usersPropsType} from "../../Redux/users-reducer";
 import {v1} from "uuid";
 import UserImg from "../../images/userpic.png";
 
@@ -79,11 +79,18 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                   onUnfollow={props.onUnfollow}
 
         />)
+
+    const setUsers = () => {
+        if(props.usersList.length === 4) {
+            props.showMore(users)
+        }
+    }
+
     return (
         <div className={style.section}>
             <div className={style.wrapper}>
                 {UsersCards}
-                <button className={`${style.btn} ${style.showMore}`} onClick={() => props.showMore(users)}>Show More</button>
+                <button className={`${style.btn} ${style.showMore}`} onClick={setUsers}>Show More</button>
             </div>
         </div>
     )
