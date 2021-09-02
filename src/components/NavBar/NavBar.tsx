@@ -27,6 +27,9 @@ export const NavBar: React.FC<NavBarPropsType> = (props) => {
                     <li className={`${style.item} ${style.profile}`}>
                         <NavLink to={'/profile'} activeClassName={style.active}>Profile</NavLink>
                     </li>
+                    <li className={`${style.item} ${style.users}`}>
+                        <NavLink to={'/users'} activeClassName={style.active}>Users</NavLink>
+                    </li>
                     <li className={`${style.item} ${style.messages}`}>
                         <NavLink to={'/messages'} activeClassName={style.active}>Messages</NavLink>
                     </li>
@@ -35,9 +38,6 @@ export const NavBar: React.FC<NavBarPropsType> = (props) => {
                     </li>
                     <li className={`${style.item} ${style.music}`}>
                         <NavLink to={'/music'} activeClassName={style.active}>Music</NavLink>
-                    </li>
-                    <li className={`${style.item} ${style.users}`}>
-                        <NavLink to={'/users'} activeClassName={style.active}>Users</NavLink>
                     </li>
                     <li className={`${style.item} ${style.settings}`}>
                         <NavLink to={'/settings'} activeClassName={style.active}>Settings</NavLink>

@@ -91,3 +91,30 @@
     margin-bottom: 30px;
     width: 150px;
 }
+
+.pageNumberWrapper {
+    margin: 20px;
+}
+
+.pageNumberList {
+    list-style-type: none;
+    display: flex;
+}
+
+.pageNumberItem {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.pageNumberItem:hover {
+    font-weight: bold;
+}
+
+.pageNumberItem + .pageNumberItem {
+    margin-left: 20px;
+}
+
+.active {
+    font-size: 22px;
+    font-weight: bold;
+}

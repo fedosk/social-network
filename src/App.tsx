@@ -20,14 +20,14 @@ const App: React.FC = (props) => {
                 <div className={'appWrapperContent'}>
                     <Route path={['/profile','/social-network']}
                            render={() => <Profile/>}/>
+                    <Route path={'/users'}
+                           render={() => <UsersContainer/>}/>
                     <Route path={'/messages'}
                            render={() => <MessagesContainer/>}/>
                     <Route path={'/news'}
                            render={() => <News/>}/>
                     <Route path={'/music'}
                            render={() => <Music/>}/>
-                    <Route path={'/users'}
-                           render={() => <UsersContainer/>}/>
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
                 </div>

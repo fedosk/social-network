@@ -11,7 +11,7 @@ let mapStateToProps = (state: RootStateTypes) => {
 }
 
 let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
-    return
+    return {}
 }
 
 const NavBarContainer = connect(mapStateToProps, mapDispatchToProps)(NavBar)

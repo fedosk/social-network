@@ -1,8 +1,10 @@
 import React from "react";
+/*
 import style from "../Users/Users.module.css";
 import {usersPropsType} from "../../Redux/users-reducer";
 import {v1} from "uuid";
 import UserImg from "../../images/userpic.png";
+import axios from "axios";
 
 type UsersPropsType = {
     usersList: Array<usersPropsType>
@@ -17,6 +19,7 @@ type usersCardPropsType = usersPropsType & {
 }
 
 const users: Array<usersPropsType> = [
+
     {
         id: v1(),
         follow: true,
@@ -54,10 +57,10 @@ const users: Array<usersPropsType> = [
 const UserCard: React.FC<usersCardPropsType> = (props) => {
     return (
         <div className={style.userCardWrapper}>
-            <img className={style.userPic} src={props.userPic} alt={'userPic'}/>
+            <img className={style.userPic} src={props.userPic != null ? props.userPic : UserImg} alt={'userPic'}/>
             <div className={style.textWrapper}>
                 <p className={style.name}>{props.name}</p>
-                <p className={style.location}>{props.location.city}, {props.location.country}</p>
+                <p className={style.location}>{props.location?.city}, {props.location?.country}</p>
                 <p className={style.status}>{props.status}</p>
             </div>
             {!props.follow
@@ -80,9 +83,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
         />)
 
-    const setUsers = () => {
-        if(props.usersList.length === 4) {
-            props.showMore(users)
+    const getUsers = () => {
+        if (props.usersList.length === 4) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(respnse => {
+                    props.showMore(respnse.data.items)
+                })
         }
     }
 
@@ -90,10 +96,10 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         <div className={style.section}>
             <div className={style.wrapper}>
                 {UsersCards}
-                <button className={`${style.btn} ${style.showMore}`} onClick={setUsers}>Show More</button>
+                <button className={`${style.btn} ${style.showMore}`} onClick={getUsers}>Show More</button>
             </div>
         </div>
     )
 }
 
-export default Users
+export default Users*/
