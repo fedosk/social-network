@@ -1,105 +1,67 @@
 import React from "react";
-/*
 import style from "../Users/Users.module.css";
 import {usersPropsType} from "../../Redux/users-reducer";
-import {v1} from "uuid";
 import UserImg from "../../images/userpic.png";
-import axios from "axios";
+import {v1} from "uuid";
 
 type UsersPropsType = {
     usersList: Array<usersPropsType>
+    pageSize: number
+    totalCount: number
+    currentPage: number
     onFollow: (id: string) => void
     onUnfollow: (id: string) => void
-    showMore: (users: usersPropsType[]) => void
+    changePage: (currentPage: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
-type usersCardPropsType = usersPropsType & {
-    onFollow: (id: string) => void
-    onUnfollow: (id: string) => void
-}
+export const Users = (props: UsersPropsType) => {
 
-const users: Array<usersPropsType> = [
-
-    {
-        id: v1(),
-        follow: true,
-        name: 'Sergej Orda',
-        userPic: UserImg,
-        status: 'I\'m looking for a job',
-        location: {city: 'Minsk', country: 'Belarus'}
-    },
-    {
-        id: v1(),
-        follow: false,
-        name: 'Danil Pleshko',
-        userPic: UserImg,
-        status: 'I\'m looking for a job',
-        location: {city: 'Minsk', country: 'Belarus'}
-    },
-    {
-        id: v1(),
-        follow: false,
-        name: 'Anton Kasian',
-        userPic: UserImg,
-        status: 'I\'m looking for a job',
-        location: {city: 'Minsk', country: 'Belarus'}
-    },
-    {
-        id: v1(),
-        follow: false,
-        name: 'Ivan Ilkovskiy',
-        userPic: UserImg,
-        status: 'I\'m looking for a job',
-        location: {city: 'Minsk', country: 'Belarus'}
-    }
-]
-
-const UserCard: React.FC<usersCardPropsType> = (props) => {
-    return (
-        <div className={style.userCardWrapper}>
-            <img className={style.userPic} src={props.userPic != null ? props.userPic : UserImg} alt={'userPic'}/>
-            <div className={style.textWrapper}>
-                <p className={style.name}>{props.name}</p>
-                <p className={style.location}>{props.location?.city}, {props.location?.country}</p>
-                <p className={style.status}>{props.status}</p>
-            </div>
-            {!props.follow
-                ? <button className={style.btn} onClick={() => props.onFollow(props.id)}>follow</button>
-                : <button className={style.btn} onClick={() => props.onUnfollow(props.id)}>unfollow</button>}
-        </div>
-    )
-}
-
-export const Users: React.FC<UsersPropsType> = (props) => {
-    let UsersCards = props.usersList.map((u: usersPropsType) =>
-        <UserCard id={u.id}
-                  follow={u.follow}
-                  name={u.name}
-                  userPic={u.userPic}
-                  status={u.status}
-                  location={u.location} key={u.id}
-                  onFollow={props.onFollow}
-                  onUnfollow={props.onUnfollow}
-
-        />)
-
-    const getUsers = () => {
-        if (props.usersList.length === 4) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(respnse => {
-                    props.showMore(respnse.data.items)
-                })
-        }
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize)
+    let numberOfPages = []
+    for (let i = 1; i < pagesCount + 1; i++) {
+        numberOfPages.push(i)
     }
 
     return (
         <div className={style.section}>
             <div className={style.wrapper}>
-                {UsersCards}
-                <button className={`${style.btn} ${style.showMore}`} onClick={getUsers}>Show More</button>
+                <div className={style.pageNumberWrapper}>
+                    <ul className={style.pageNumberList}>
+                        {
+                            numberOfPages.map((n, i) => {
+                                if (i < 10) {
+                                    return <li onClick={() => props.onPageChanged(n)}
+                                               key={v1()}
+                                               className={props.currentPage === n
+                                                   ? style.pageNumberItem + ' ' + style.active
+                                                   : style.pageNumberItem}>{n}</li>
+                                }
+
+                            })
+                        }
+                    </ul>
+                </div>
+                {props.usersList.map((u: usersPropsType) =>
+                    <div key={v1()} className={style.userCardWrapper}>
+                        <img className={style.userPic} src={u.photos.small != null ? u.photos.small : UserImg}
+                             alt={'userPic'}/>
+                        <div key={v1()} className={style.textWrapper}>
+                            <p className={style.name}>{u.name}</p>
+                            <p className={style.location}>{u.uniqueUrlName}</p>
+                            <p className={style.status}>{u.status}</p>
+                        </div>
+                        {!u.followed
+                            ? <button className={style.btn}
+                                      onClick={() => props.onFollow(u.id)}>follow</button>
+                            : <button className={style.btn}
+                                      onClick={() => props.onUnfollow(u.id)}>unfollow</button>}
+                    </div>
+                )}
             </div>
         </div>
-    )
+    );
 }
 
-export default Users*/
+
+
