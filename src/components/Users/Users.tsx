@@ -3,6 +3,7 @@ import style from "../Users/Users.module.css";
 import {usersPropsType} from "../../Redux/users-reducer";
 import UserImg from "../../images/userpic.png";
 import {v1} from "uuid";
+import preloader from "../../images/Rolling.gif";
 
 type UsersPropsType = {
     usersList: Array<usersPropsType>
@@ -37,6 +38,7 @@ export const Users = (props: UsersPropsType) => {
                                                    ? style.pageNumberItem + ' ' + style.active
                                                    : style.pageNumberItem}>{n}</li>
                                 }
+                                return ''
 
                             })
                         }
