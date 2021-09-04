@@ -1,19 +1,15 @@
 import React from 'react';
-import {AtionCreatorType, RootStateTypes} from '../../Redux/store';
 import {connect} from "react-redux";
 import {NavBar} from "./NavBar";
+import {RootState} from "../../Redux/redux-store";
 
 
-let mapStateToProps = (state: RootStateTypes) => {
+let mapStateToProps = (state: RootState) => {
     return {
         friendsList: state.general
     }
 }
 
-let mapDispatchToProps = (dispatch: (action: AtionCreatorType) => void) => {
-    return {}
-}
-
-const NavBarContainer = connect(mapStateToProps, mapDispatchToProps)(NavBar)
+const NavBarContainer = connect(mapStateToProps, {})(NavBar)
 
 export default NavBarContainer

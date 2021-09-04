@@ -16,10 +16,10 @@
     height: 140px;
     border-radius: 8px;
     background-color: burlywood;
-    background-image: url("./../../../images/userpic.png");
     background-repeat: no-repeat;
     background-size: cover;
     margin-right: 40px;
+    background-position: center;
 }
 
 .infoWrapper {

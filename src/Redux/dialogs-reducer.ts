@@ -1,6 +1,5 @@
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
-import {AtionCreatorType} from "./store";
 
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const CHANGE_MESSAGE_INPUT_TEXT = 'CHANGE-MESSAGE-INPUT-TEXT'
@@ -69,11 +68,13 @@ const dialogsReducer = (state: dialogsPropsType = initialState, action: AtionCre
     }
 }
 
-export const sendMessageActionCreator = () => ({
+type AtionCreatorType = ReturnType<typeof onSendMessage> | ReturnType<typeof onChangeMessageText>
+
+export const onSendMessage = () => ({
     type: SEND_MESSAGE
 } as const)
 
-export const changeMessageInputTextActionCreator = (messageInputText: string) => ({
+export const onChangeMessageText = (messageInputText: string) => ({
     type: CHANGE_MESSAGE_INPUT_TEXT,
     messageInputText: messageInputText
 } as const)

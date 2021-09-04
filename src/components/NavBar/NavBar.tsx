@@ -1,7 +1,17 @@
 import React from 'react';
 import style from './NavBar.module.css'
 import {NavLink} from 'react-router-dom';
-import {FriendsPropsType, GeneralPropsType} from '../../Redux/store';
+
+
+export type FriendsPropsType = {
+    id: string
+    name: string
+    userPic: string
+}
+
+export type GeneralPropsType = {
+    friends: Array<FriendsPropsType>
+}
 
 type NavBarPropsType = {
     friendsList: GeneralPropsType

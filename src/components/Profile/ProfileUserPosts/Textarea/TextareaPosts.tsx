@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import style from './TextareaPosts.module.css';
-import {PostsDataPropsType} from '../../../../Redux/store';
-
 import {NewPost} from "../NewPost/NewPost";
+import {PostsDataPropsType} from "../../../../Redux/profile-reducer";
 
 type TextareaPostsPropsType = {
-    postText: string
     postsData: Array<PostsDataPropsType>
-    changePostText: (text: string) => void
+    postText: string
     addPost: () => void
+    changePostText: (text: string) => void
 }
 
 
@@ -52,7 +51,6 @@ export const TextareaPosts: React.FC<TextareaPostsPropsType> = (props) => {
             </div>
             <NewPost postsData={props.postsData}/>
         </>
-
     )
 }
 

@@ -1,4 +1,4 @@
-import {AtionCreatorType, GeneralPropsType, MessagesPagePropsType} from "./store";
+
 import {v1} from "uuid";
 import UserImg from "../images/userpic.png";
 
@@ -21,7 +21,7 @@ const initialState:sideBarPropsType = {
     ],
 }
 
-const sidebarReducer = (state: sideBarPropsType = initialState, action: AtionCreatorType) => {
+const sidebarReducer = (state: sideBarPropsType = initialState) => {
     return state
 }
 

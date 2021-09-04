@@ -2,7 +2,8 @@ import React from 'react';
 import style from './Messages.module.css';
 import generelContentStyle from './../Profile/Profile.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsDataPropsType, MessagesDataPropsType} from "../../Redux/store";
+import {DialogsDataPropsType, MessagesDataPropsType} from "../../Redux/dialogs-reducer";
+
 
 type InputMessagePropsType = {
     onSendMessage: () => void

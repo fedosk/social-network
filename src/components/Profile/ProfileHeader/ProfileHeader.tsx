@@ -3,8 +3,6 @@ import style from './ProfileHeader.module.css';
 
 export const ProfileHeader = () => {
     return (
-        <div className={style.ProfileHeader}>
-
-        </div>
+        <div className={style.ProfileHeader}/>
     )
 }

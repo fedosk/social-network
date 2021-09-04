@@ -1,7 +1,8 @@
 import style from './NewPost.module.css';
 import React from 'react';
 import  { ReactComponent as Like }  from './../../../../images/like.svg'
-import {PostsDataPropsType} from '../../../../Redux/store';
+import {PostsDataPropsType} from "../../../../Redux/profile-reducer";
+
 
 
 type NewPostPropsType = {
