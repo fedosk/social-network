@@ -4,7 +4,7 @@ import {usersPropsType} from "../../Redux/users-reducer";
 import UserImg from "../../images/userpic.png";
 import {v1} from "uuid";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followAPI} from "../../API/api";
 
 
 type UsersPropsType = {
@@ -12,10 +12,12 @@ type UsersPropsType = {
     pageSize: number
     totalCount: number
     currentPage: number
+    followingInProgress: string[]
     onFollow: (id: string) => void
     onUnfollow: (id: string) => void
     changePage: (currentPage: number) => void
     onPageChanged: (pageNumber: number) => void
+    setFollowingInProgress: (isFetching: boolean, id: string) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -26,6 +28,27 @@ export const Users = (props: UsersPropsType) => {
         numberOfPages.push(i)
     }
 
+    const onPressFollowBtn = (id: string) => {
+        props.setFollowingInProgress(true, id)
+        followAPI.followUser(id)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    props.onFollow(id)
+                }
+                props.setFollowingInProgress(false, id)
+            })
+    }
+
+    const onPressUnFollowBtn = (id: string) => {
+        props.setFollowingInProgress(true, id)
+        followAPI.unFollowUser(id)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    props.onUnfollow(id)
+                }
+                props.setFollowingInProgress(false, id)
+            })
+    }
 
     return (
         <div className={style.section}>
@@ -64,36 +87,11 @@ export const Users = (props: UsersPropsType) => {
                         </div>
                         {!u.followed
                             ? <button className={style.btn}
-                                      onClick={() => {
-                                          axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                              {},
-                                              {
-                                                  withCredentials: true,
-                                                  headers: {
-                                                      "API-KEY": "0cacf017-a2b3-4867-b5f3-0ddb61c5eaf8"
-                                                  }
-                                              })
-                                              .then(response => {
-                                                  if (response.data.resultCode == 0) {
-                                                      props.onFollow(u.id)
-                                                  }
-                                              })
-                                      }}>follow</button>
+                                      disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => onPressFollowBtn(u.id)}>follow</button>
                             : <button className={style.btn}
-                                      onClick={() => {
-                                          axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                              {
-                                                  withCredentials: true,
-                                                  headers: {
-                                                      "API-KEY": "0cacf017-a2b3-4867-b5f3-0ddb61c5eaf8"
-                                                  }
-                                              })
-                                              .then(response => {
-                                                  if (response.data.resultCode == 0) {
-                                                      props.onUnfollow(u.id)
-                                                  }
-                                              })
-                                      }}>unfollow</button>}
+                                      disabled={props.followingInProgress.some(id => id === (u.id))}
+                                      onClick={() => onPressUnFollowBtn(u.id)}>unfollow</button>}
                     </div>
                 )}
             </div>

@@ -88,6 +88,10 @@
     transition: 0.2s;
 }
 
+.btn:disabled {
+    background: rgba(126, 114, 242, 0.4);
+}
+
 .showMore {
     margin-top: 30px;
     margin-bottom: 30px;
